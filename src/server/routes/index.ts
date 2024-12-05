@@ -1,5 +1,5 @@
-import { Router, type Request, type Response } from 'express';
-import { StatusCodes } from "http-status-codes";
+import { Router, type Response } from 'express';
+import { CidadesController } from "./../controllers";
 
 const router = Router();
 
@@ -7,8 +7,6 @@ router.get('/', (_, res: Response) => {
   res.send('Hello World!')
 });
 
-router.post('/test/:id', (req: Request, res: Response) => {
-  res.status(StatusCodes.OK).json(req.body);
-});
+router.post('/cidades', CidadesController.create);
 
 export { router };
