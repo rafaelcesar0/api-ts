@@ -21,10 +21,12 @@
 		"rules": {
 			"recommended": true,
 			"complexity": {
-				"noBannedTypes": "off"
+				"noBannedTypes": "off",
+				"noForEach": "off"
 			},
 			"suspicious":{
-				"noExplicitAny":"off"
+				"noExplicitAny":"off",
+				"noAssignInExpressions": "off"
 			}
 		}
 	},
