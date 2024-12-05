@@ -1,29 +1,24 @@
-import type { Request, Response } from "express";
+import type { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { z } from "zod";
+import { validation } from "../../shared/middleware";
 
-
-const ZCidade = z.object({
-  nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres").trim(),
-});
-
-type TCidade = z.infer<typeof ZCidade>;
-
-export const create = async(req: Request<{},{}, TCidade>, res: Response) => {
-	try {
-
-		const data: TCidade = ZCidade.parse(req.body);
-
-		res.send(data);
-
-	} catch (error) {
-
-		const zodError = error as z.ZodError;
-
-		res.status(StatusCodes.BAD_REQUEST).json({
-			errors: {
-				dafault: zodError.errors,
-			}
-		})
-	}
+const schemas = {
+	body: z.object({
+		nome: z.string().min(3).trim(),
+		estado: z.string().min(3).trim(),
+	}),
+	query: z.object({
+		filter: z.string().nullable(),
+	})
 }
+
+type TBody = z.infer<typeof schemas.body>;
+
+type TQuery = z.infer<typeof schemas.query>;
+
+export const createValidation = validation(schemas);
+
+export const create = async (req: Request<{}, {}, TBody>, res: Response) => {
+	res.send({ success: "Criado!" });
+};
