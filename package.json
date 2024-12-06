@@ -4,7 +4,8 @@
   "type": "module",
   "main": "src/index.ts",
   "scripts": {
-    "start": "bun --watch run src/index.ts"
+    "start": "bun --watch run src/index.ts",
+    "test": "jest"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
