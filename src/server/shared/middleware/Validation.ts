@@ -4,9 +4,9 @@ import { ZodError, type ZodObject } from "zod";
 
 type TProperty = "body" | "header" | "params" | "query";
 
-type TAllSchemas = Record<TProperty, ZodObject<any>>;
+export type TSchemas = Record<TProperty, ZodObject<any>>;
 
-type TValidation = (schemas: Partial<TAllSchemas>) => RequestHandler;
+type TValidation = (schemas: Partial<TSchemas>) => RequestHandler;
 
 export const validation: TValidation = (schemas) => (req, res, next) => {
 	const errorsResult: Record<string, Record<string, string>> = {};
