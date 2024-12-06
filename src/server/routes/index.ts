@@ -7,6 +7,7 @@ router.get('/', (_, res: Response) => {
   res.send('Hello World!')
 });
 
+router.get('/cidades', CidadesController.getAllValidation, CidadesController.getAll);
 router.post('/cidades', CidadesController.createValidation, CidadesController.create);
 
 export { router };
