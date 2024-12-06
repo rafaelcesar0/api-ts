@@ -14,7 +14,7 @@ setErrorMap((issue, ctx) => {
 			return { message: `Deve ter pelo menos ${issue.minimum} caracteres` };
 		}
 		if (issue.type === "number") {
-			return { message: `Deve ser no mínimo ${issue.minimum}` };
+			return { message: `Deve ser maior que ${issue.minimum}` };
 		}
 		if (issue.type === "array") {
 			return { message: `Deve ter no mínimo ${issue.minimum} itens` };
