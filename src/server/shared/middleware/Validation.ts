@@ -8,30 +8,27 @@ type TAllSchemas = Record<TProperty, ZodObject<any>>;
 
 type TValidation = (schemas: Partial<TAllSchemas>) => RequestHandler;
 
-export const validation: TValidation = (schemas) => async (req, res, next) => {
-
-	// const errorsResult: Record<TProperty, Record<string, string>> = {};
+export const validation: TValidation = (schemas) => (req, res, next) => {
+	const errorsResult: Record<string, Record<string, string>> = {};
 
 	Object.entries(schemas).forEach(([key, schema]) => {
 		try {
-			schema.parseAsync(req[key as TProperty]);
-		} catch (error) {
-			if (error instanceof ZodError) {
+			schema.parse(req[key as TProperty]);
+		} catch (err) {
+			if (err instanceof ZodError) {
 				const errors: Record<string, string> = {};
-				error.errors.forEach(
-					(err) => (errors[err.path[0]] = err.message)
+				err.errors.forEach(
+					(error) => (errors[error.path[0]] = error.message)
 				);
 
-				// errorsResult[key as TProperty] = errors
-
-				// res.status(StatusCodes.BAD_REQUEST).json({ errors });
-			} else {
-				// res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-				// 	errors: [{ message: "Ocorreu um erro inesperado" }],
-				// });
+				errorsResult[key] = errors;
 			}
 		}
 	});
 
-
+	if (Object.entries(errorsResult).length > 0) {
+		res.status(StatusCodes.BAD_REQUEST).json({ errors: errorsResult });
+	} else {
+		next();
+	}
 };

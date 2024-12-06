@@ -13,12 +13,8 @@ const schemas = {
 	})
 }
 
-type TBody = z.infer<typeof schemas.body>;
-
-type TQuery = z.infer<typeof schemas.query>;
-
 export const createValidation = validation(schemas);
 
-export const create = async (req: Request<{}, {}, TBody>, res: Response) => {
+export const create = async (req: Request, res: Response) => {
 	res.send({ success: "Criado!" });
 };
