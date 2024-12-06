@@ -8,13 +8,10 @@ const schemas = {
 		nome: z.string().min(3).trim(),
 		estado: z.string().min(3).trim(),
 	}),
-	query: z.object({
-		filter: z.string().nullable(),
-	})
 }
 
 export const createValidation = validation(schemas);
 
-export const create = async (req: Request, res: Response) => {
+export const create = (_: Request, res: Response) => {
 	res.send({ success: "Criado!" });
 };
