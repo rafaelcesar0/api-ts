@@ -1,17 +1,19 @@
-import type { Request, RequestHandler, Response } from "express";
-import { StatusCodes } from "http-status-codes";
+import type { Request, Response } from "express";
 import { z } from "zod";
 import { validation } from "../../shared/middleware";
+import { StatusCodes } from "http-status-codes";
 
-const schemas = {
-	body: z.object({
-		nome: z.string().min(3).trim(),
-		estado: z.string().min(3).trim(),
-	}),
-}
 
-export const createValidation = validation(schemas);
+const body = z.object({
+	nome: z.string().min(3).trim(),
+})
 
-export const create = (_: Request, res: Response) => {
-	res.send({ success: "Criado!" });
+type TBody = z.infer<typeof body>
+
+export const createValidation = validation({body});
+
+export const create = (req: Request<{}, {}, TBody>, res: Response) => {
+	console.log(req.body);
+
+	res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: "Não implementado!" });
 };
