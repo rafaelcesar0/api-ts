@@ -4,16 +4,16 @@ import { validation } from "../../shared/middleware";
 import { StatusCodes } from "http-status-codes";
 
 
-const body = z.object({
-	name: z.string().min(3).trim(),
-})
+const params = z.object({
+	id: z.string().uuid('ID Invalido'),
+});
 
-type TBody = z.infer<typeof body>
+type TParams = z.infer<typeof params>
 
-export const createValidation = validation({body});
+export const getByIdValidation = validation({params});
 
-export const create = (req: Request<{}, {}, TBody>, res: Response) => {
-	console.log(req.body);
+export const getById = (req: Request<TParams>, res: Response) => {
+	console.log(req.params);
 
 	res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: "Não implementado!" });
 };
