@@ -32,7 +32,13 @@
 	},
 	"javascript": {
 		"formatter": {
-			"quoteStyle": "single"
+			"quoteStyle": "single",
+			"lineWidth": 120
 		}
-	}
+	},
+	"json": {
+    "formatter": {
+      "enabled": false
+    }
+  }
 }
