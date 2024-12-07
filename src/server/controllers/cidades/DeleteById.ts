@@ -14,5 +14,5 @@ export const deleteByIdValidation = validation({ params });
 export const deleteById = (req: Request<TParams>, res: Response) => {
 	console.log(req.params);
 
-	res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: 'Não implementado!' });
+	res.status(StatusCodes.NO_CONTENT).send();
 };
