@@ -14,5 +14,5 @@ export const createValidation = validation({ body });
 export const create = (req: Request<{}, {}, TBody>, res: Response) => {
 	console.log(req.body);
 
-	res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ success: 'Não implementado!' });
+	res.status(StatusCodes.CREATED).json({ success: 'Não implementado!' });
 };
