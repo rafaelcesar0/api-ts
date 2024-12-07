@@ -23,5 +23,11 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
-  }
+  },
+	"exclude": [
+		"./jest.config.ts",
+		"./node_modules",
+		"./test",
+		"./build",
+	]
 }
