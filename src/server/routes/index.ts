@@ -1,10 +1,10 @@
 import { Router, type Response } from 'express';
-import { CidadesController } from "./../controllers";
+import { CidadesController } from './../controllers';
 
 const router = Router();
 
 router.get('/', (_, res: Response) => {
-  res.send('Hello World!')
+	res.send('Hello World!');
 });
 
 router.get('/cidades', CidadesController.getAllValidation, CidadesController.getAll);

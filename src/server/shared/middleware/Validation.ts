@@ -1,8 +1,8 @@
-import type { RequestHandler } from "express";
-import { StatusCodes } from "http-status-codes";
-import { ZodError, type ZodObject } from "zod";
+import type { RequestHandler } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import { ZodError, type ZodObject } from 'zod';
 
-type TProperty = "body" | "header" | "params" | "query";
+type TProperty = 'body' | 'header' | 'params' | 'query';
 
 export type TSchemas = Record<TProperty, ZodObject<any>>;
 
@@ -17,9 +17,7 @@ export const validation: TValidation = (schemas) => (req, res, next) => {
 		} catch (err) {
 			if (err instanceof ZodError) {
 				const errors: Record<string, string> = {};
-				err.errors.forEach(
-					(error) => (errors[error.path[0]] = error.message)
-				);
+				err.errors.forEach((error) => (errors[error.path[0]] = error.message));
 
 				errorsResult[key] = errors;
 			}
